@@ -39,7 +39,7 @@ namespace Twitch_Bot_0._0._3
 
             //modList.Add("skydiver555");
 
-            VipList.Add("PirateOverLord");
+            VipList.Add("pirateoverlord");
 
 
             //intellingen

@@ -77,7 +77,7 @@ namespace Twitch_Bot_0._0._3
         private string pirate()
         {
             Console.WriteLine("start vote commando actevatid vote command");
-            string say = "Arr maties! I'm the pirate queen!!!";
+            string say = "Arr matey's! I'm the pirate queen!!!";
             return say;
         }
 

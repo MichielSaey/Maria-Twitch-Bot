@@ -16,6 +16,7 @@ namespace Twitch_Bot_0._0._3
             commandlist.Add("!awake");
             commandlist.Add("!startvote");
             commandlist.Add("!tanks");
+            commandlist.Add("!stop");
 
             vipCommandlist.Add("!pirate");
         }
@@ -56,6 +57,9 @@ namespace Twitch_Bot_0._0._3
                     break;
                 case "!pirate":
                     output = pirate();
+                    break;
+                case "!stop":
+                    output = "stop";
                     break;
             }
             return output;

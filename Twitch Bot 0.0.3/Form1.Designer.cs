@@ -41,6 +41,7 @@
             this.UsernameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.OathKeyTextbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(239, 261);
+            this.button1.Location = new System.Drawing.Point(613, 266);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -82,7 +83,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 199);
+            this.label3.Location = new System.Drawing.Point(14, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 4;
@@ -90,7 +91,7 @@
             // 
             // ServerTextbox
             // 
-            this.ServerTextbox.Location = new System.Drawing.Point(92, 196);
+            this.ServerTextbox.Location = new System.Drawing.Point(92, 184);
             this.ServerTextbox.Name = "ServerTextbox";
             this.ServerTextbox.Size = new System.Drawing.Size(100, 20);
             this.ServerTextbox.TabIndex = 5;
@@ -98,7 +99,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 225);
+            this.label4.Location = new System.Drawing.Point(14, 213);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 6;
@@ -106,7 +107,7 @@
             // 
             // PortTextBox
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(92, 222);
+            this.PortTextBox.Location = new System.Drawing.Point(92, 210);
             this.PortTextBox.Name = "PortTextBox";
             this.PortTextBox.Size = new System.Drawing.Size(100, 20);
             this.PortTextBox.TabIndex = 7;
@@ -114,7 +115,7 @@
             // Username
             // 
             this.Username.AutoSize = true;
-            this.Username.Location = new System.Drawing.Point(12, 119);
+            this.Username.Location = new System.Drawing.Point(12, 107);
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(74, 13);
             this.Username.TabIndex = 8;
@@ -122,7 +123,7 @@
             // 
             // UsernameTextBox
             // 
-            this.UsernameTextBox.Location = new System.Drawing.Point(92, 116);
+            this.UsernameTextBox.Location = new System.Drawing.Point(92, 104);
             this.UsernameTextBox.Name = "UsernameTextBox";
             this.UsernameTextBox.Size = new System.Drawing.Size(100, 20);
             this.UsernameTextBox.TabIndex = 9;
@@ -130,7 +131,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 145);
+            this.label5.Location = new System.Drawing.Point(14, 133);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 10;
@@ -138,16 +139,27 @@
             // 
             // OathKeyTextbox
             // 
-            this.OathKeyTextbox.Location = new System.Drawing.Point(92, 142);
+            this.OathKeyTextbox.Location = new System.Drawing.Point(92, 130);
             this.OathKeyTextbox.Name = "OathKeyTextbox";
             this.OathKeyTextbox.Size = new System.Drawing.Size(222, 20);
             this.OathKeyTextbox.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(337, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(105, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Command setings";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 296);
+            this.ClientSize = new System.Drawing.Size(700, 301);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.OathKeyTextbox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.UsernameTextBox);
@@ -183,6 +195,7 @@
         private System.Windows.Forms.TextBox UsernameTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox OathKeyTextbox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

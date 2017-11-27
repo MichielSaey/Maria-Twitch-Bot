@@ -30,6 +30,10 @@ namespace Twitch_Bot_0._0._3
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            button1.Enabled = false;
+
+
             List<string> modList = new List<string>();
             List<string> VipList = new List<string>();
 
@@ -37,7 +41,7 @@ namespace Twitch_Bot_0._0._3
             modList.Add("nightbot");
             modList.Add("steven_mc19");
 
-            //modList.Add("skydiver555");
+            modList.Add("skydiver555");
 
             VipList.Add("pirateoverlord");
 
@@ -181,6 +185,12 @@ namespace Twitch_Bot_0._0._3
                                             startvote = true;
                                             irc.sendPublicmsg("So yea,you idiots can vote for like 20 seconds. Using !cast with (A,B or X).");
                                         }
+                                        else if (say == "stop")
+                                        {
+                                            irc.sendPublicmsg("well i'm going to stop working now");
+                                            StopBotton();
+                                            return;
+                                        }
                                         else
                                         {
                                             irc.sendPublicmsg(say);
@@ -208,6 +218,13 @@ namespace Twitch_Bot_0._0._3
                         break;
                 }
             }
+        }
+
+        private void StopBotton()
+        {
+            Console.WriteLine("Maria is stopped");
+            button1.Enabled = true;
+            
         }
     }
 }

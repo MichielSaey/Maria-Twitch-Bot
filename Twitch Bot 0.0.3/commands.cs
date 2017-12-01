@@ -1,108 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Twitch_Bot_0._0._3
 {
     class commands
     {
-        private List<string> commandlist = new List<string>();
-        private List<string> vipCommandlist = new List<string>();
 
-        public commands()
+        private DbController dbcontroller = new DbController();
+
+        public string respons;
+        public string returnvar;
+
+
+        public Boolean modlistChecker(string sendingUser)
         {
-            commandlist.Add("!awake");
-            commandlist.Add("!startvote");
-            commandlist.Add("!tanks");
-            commandlist.Add("!stop");
-
-            vipCommandlist.Add("!pirate");
-        }
-
-        public Boolean cammandChecker(string msg)
-        {
-            if (commandlist.Contains(msg))
+            dbcontroller.exeQuery("SELECT Users.[username], Users.[mod] FROM Users WHERE Users.[mod] = TRUE AND Users.[username] = '" + sendingUser + "' ;");
+            if (dbcontroller.DBDT.Rows.Count != 0)
             {
-                return true;
+                if (dbcontroller.DBDT.Rows[0].Field<string>(0) == sendingUser)
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
 
-        public Boolean vipCammandChecker(string msg)
+        public void ModCommandChecker(string command)
         {
-            if (vipCommandlist.Contains(msg))
+            dbcontroller.exeQuery("SELECT Commands.[Command], Commands.[respons], Commands.[returnVar], Commands.[modCommand] FROM Commands WHERE Commands.[modCommand] = TRUE ");
+
+            if (dbcontroller.DBDT.Rows.Count != 0)
             {
-                return true;
+                foreach (DataRow row in dbcontroller.DBDT.Rows)
+                {
+                    if (command.Contains(row.Field<string>(0)))
+                    {
+                        respons = row.Field<string>(1);
+                        returnvar = row.Field<string>(2);
+                    }
+                }
             }
-            return false;
         }
 
-        public string commandsSelector(string msg)
+        public List<string> getCommandList()
         {
-            string output = null;
+            dbcontroller.exeQuery("SELECT Commands.[Command] FROM Commands ");
 
-            switch (msg)
+            List<string> CommandList = new List<string>();
+
+            foreach (DataRow row in dbcontroller.DBDT.Rows)
             {
-
-                case "!awake":
-                    output = awake();
-                    break;
-                case "!startvote":
-                    output = startvote();
-                    break;
-                case "!tanks":
-                    output = tanksmaria();
-                    break;
-                case "!pirate":
-                    output = pirate();
-                    break;
-                case "!stop":
-                    output = "stop";
-                    break;
+                CommandList.Add(row.Field<string>(0));
             }
-            return output;
-        }
 
-        public string vipCommandsSelector(string msg)
-        {
-            string output = null;
-
-            switch (msg)
-            {
-                case "!pirate":
-                    output = pirate();
-                    break;
-            }
-            return output;
-        }
-
-        private string pirate()
-        {
-            Console.WriteLine("start vote commando actevatid vote command");
-            string say = "Arr matey's! I'm the pirate queen!!!";
-            return say;
-        }
-
-        private string startvote()
-        {
-            Console.WriteLine("start vote commando actevatid vote command");
-            string say = "startvote";
-            return say;
-        }
-
-        private string awake()
-        {
-            Console.WriteLine("awake command started");
-            string say = "yeah shut up i'm here";
-            return say;
-        }
-        private string tanksmaria()
-        {
-            Console.WriteLine("awake command started");
-            string say = "Tank you so much everybody.";
-            return say;
+            return CommandList;
         }
     }
 }

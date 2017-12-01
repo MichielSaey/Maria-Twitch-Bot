@@ -15,6 +15,10 @@ namespace Twitch_Bot_0._0._3
         public string commandVar;
         private string[] message;
 
+        public string option1;
+        public string option2;
+        public string option3;
+
         public TextControoller(string completeMsg)
         {
             if (completeMsg != null)
@@ -54,11 +58,28 @@ namespace Twitch_Bot_0._0._3
         public void getThirdVar()
         {
             commandVar = message[2];
-            if (commandVar.Length >= 7)
+
+            string[] words = commandVar.Split(' ');
+            try
             {
-                commandVar = commandVar.Substring(6);
+                commandVar = words[1];
                 Console.WriteLine(commandVar);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void get3Options()
+        {
+            commandVar = message[2];
+
+            string[] words = commandVar.Split(' ');
+
+            option1 = words[1];
+            option2 = words[2];
+            option3 = words[3];
         }
     }
 }

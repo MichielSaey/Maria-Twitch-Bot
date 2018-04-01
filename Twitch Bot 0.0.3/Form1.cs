@@ -57,6 +57,9 @@ namespace Twitch_Bot_0._0._3
             string voteOption2 = Voteoption2TextBox.Text;
             string voteOption3 = Voteoption3TextBox.Text;
 
+            dbcontroler.exeQuery("UPDATE settings SET port = '" + port.ToString() + "', ip = '" + ip + "', channel = '" + channel + "', pass = '" + pass + "', user = '" + user + "', [vote Timer] = '" + voteTimer.ToString() + "', voteOption1 = '" + voteOption1 + "', VoteOption2 = '" + voteOption2 + "', VoteOption3 = '" + voteOption3 + "'");
+
+
             // verbinding naar Irc client maken
             IrcClient irc = new IrcClient(ip, port, user, pass);
             irc.JoinChannel(channel);
@@ -102,21 +105,21 @@ namespace Twitch_Bot_0._0._3
                                         aantalA++;
                                         Console.WriteLine(voteOption1 + "counted");
                                         userList.Add(Speed.sendinguser);
-                                        Console.WriteLine("!cast registerd");                                      
+                                        Console.WriteLine("!cast registerd");
                                     }
                                     else if (Speed.commandVar.ToUpper() == voteOption2)
                                     {
                                         aantalB++;
                                         Console.WriteLine("B counted");
                                         userList.Add(Speed.sendinguser);
-                                        Console.WriteLine("!cast registerd");                                     
+                                        Console.WriteLine("!cast registerd");
                                     }
                                     else if (Speed.commandVar.ToUpper() == voteOption3)
                                     {
                                         aantalX++;
                                         Console.WriteLine("C counted");
                                         userList.Add(Speed.sendinguser);
-                                        Console.WriteLine("!cast registerd");  
+                                        Console.WriteLine("!cast registerd");
                                     }
                                 }
                             }
@@ -129,6 +132,10 @@ namespace Twitch_Bot_0._0._3
                     }
                     int quickMath = Math.Max(aantalA, Math.Max(aantalB, aantalX));
 
+                    if (quickMath == 0)
+                    {
+                        irc.sendPublicmsg("so non of you scrubs voted?");
+                    }
                     if (quickMath == aantalA && quickMath == aantalB && quickMath == aantalX)
                     {
                         irc.sendPublicmsg("You guys voted all on different things? Why? Now we have a tie breaker. of " + quickMath + " votes");
@@ -147,15 +154,15 @@ namespace Twitch_Bot_0._0._3
                     }
                     else if (quickMath == aantalA)
                     {
-                        irc.sendPublicmsg("okay most of you voted " + voteOption1 + ". this is why democracy doesn't work. " + quickMath + " of you idiots voted wrong");
+                        irc.sendPublicmsg(winningMessageMaker(quickMath, voteOption1));
                     }
                     else if (quickMath == aantalB)
                     {
-                        irc.sendPublicmsg("So " + voteOption2 + " won, whatever. With like " + quickMath + " votes or what ever");
+                        irc.sendPublicmsg(winningMessageMaker(quickMath, voteOption2));
                     }
                     else if (quickMath == aantalX)
                     {
-                        irc.sendPublicmsg("Who of you idiots voted for " + voteOption3 + " " + quickMath + " times.");
+                        irc.sendPublicmsg(winningMessageMaker(quickMath, voteOption3)) ;
                     }
                     startvote = false;
                 }
@@ -174,7 +181,6 @@ namespace Twitch_Bot_0._0._3
                     default:
                         try
                         {
-
                             // This means it's a message to the channel.  Yes, PRIVMSG is IRC for messaging a channel too
                             if (xtc.preamble == "PRIVMSG")
                             {
@@ -228,6 +234,20 @@ namespace Twitch_Bot_0._0._3
                                             }
                                             irc.sendPublicmsg(text);
                                             break;
+                                        case "coinflip":
+                                            Random rando = new Random();
+                                            int randoInt = rando.Next(2);
+                                            Console.WriteLine(randoInt);
+                                            switch (randoInt)
+                                            {
+                                                case 0:
+                                                    irc.sendPublicmsg("The coin landed Head");
+                                                    break;
+                                                case 1:
+                                                    irc.sendPublicmsg("the coin landed Tails");
+                                                    break;
+                                            }
+                                            break;
                                         default:
                                             irc.sendPublicmsg(cmd.respons);
                                             break;
@@ -245,12 +265,31 @@ namespace Twitch_Bot_0._0._3
                 }
             }
         }
-
         private void StopBotton()
         {
             Console.WriteLine("Maria is stopped");
             button1.Enabled = true;
 
+        }
+        private string winningMessageMaker( int winningAmount, string winningString) {
+
+            string winningMessgage = "";
+
+            Random RandoInt = new Random();
+            int filledInt = RandoInt.Next(5);
+
+            dbcontroler.exeQuery("select * from winningMessage where id = " + filledInt);
+
+            foreach (DataRow row in dbcontroler.DBDT.Rows)
+            {
+                winningMessgage = winningMessgage + row.Field<string>(1);
+                winningMessgage = winningMessgage + " " + winningString;
+                winningMessgage = winningMessgage + row.Field<string>(2);
+                winningMessgage = winningMessgage + " " + winningAmount;
+                winningMessgage = winningMessgage + row.Field<string>(3);
+            }
+
+            return winningMessgage;
         }
     }
 }

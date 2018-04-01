@@ -27,7 +27,7 @@ namespace Twitch_Bot_0._0._3
         public Int32 recordcount;
 
         public string exeptions;
-        public void exeQuery(string query)
+        public void exeQuery(String query)
         {
             // RESET STATISTICS '
             recordcount = 0;
